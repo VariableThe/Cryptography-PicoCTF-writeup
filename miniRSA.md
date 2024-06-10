@@ -1,6 +1,6 @@
 # miniRSA:
 ## [Link to question](https://play.picoctf.org/practice/challenge/31?page=1&search=miniRSA)
-## [Image](https://jupiter.challenges.picoctf.org/static/eb5e6df8e14c52873cf88c582a1a4008/ciphertext)
+## [text file](https://jupiter.challenges.picoctf.org/static/eb5e6df8e14c52873cf88c582a1a4008/ciphertext)
 To start off with we can take a look at the hint 1.
 
 It has a link to the [wikipedia page explaining RSA's](https://en.wikipedia.org/wiki/RSA_(cryptosystem))<br>
