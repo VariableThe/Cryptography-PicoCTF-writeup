@@ -15,3 +15,20 @@ We can clearly make out that the first part is meant to say:
 The flad is picoCTF
 </pre>
 Using this intital block of unscrabled code, if we can figure out the way the jumbling occured, we can reverse engineer the correct flag.<br>
+So, to make this easier on myself, I thought I would write a piece of code in python that would do that for me, turns out it look longer ~_~, Oh well.<br>
+The code is:
+<pre>
+code = input("Enter the scrambled code: ")
+cList = list(code)
+
+for i in range(len(cList)):
+    if (i+1) >= 3 and (i+1) % 3 == 0:
+        cList[i-2], cList[i], cList[i-1] = cList[i], cList[i-1], cList[i-2]
+
+unscrambled_code = ''.join(cList)
+print(unscrambled_code)
+
+quit()
+</pre>
+Using this, I got 'The flag is picoCTF{7R4N5P051N6_15_3XP3N51V3_109AB02E}'<br>
+Submitting this works and the task is finished.<br>
