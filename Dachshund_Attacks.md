@@ -79,7 +79,7 @@ I finally give up and look for other sources, I find a tool called RSActftool.<b
 I'm not able to clone it, i try about 5 times, on differnt os's as well.<br>
 I though this was the end.<br>
 But all of a sudden I had an Idea.<br>
-I was unabe to run the pyhtom implementation code online or individually, because the author wrote codes in differnt places, what if I were to stich those codes together and run it as one single piece of code? Could it work?<br>
+I was unabe to run the python implementation code online or individually, because the author wrote codes in differnt places, what if I were to stich those codes together and run it as one single piece of code? Could it work?<br>
 I spent about 10 minutes stiching it together and modifying the code to make this:
 <pre>
 import math
@@ -252,7 +252,7 @@ picoCTF{proving_wiener_2635457}
 </pre>
 At that exact moment I was so overjoyed, I felt the weight of the world being lifted from my shoulders, my sanity returning again<br>
 I quickly entered the flag and it was aacepted.<br>
-I cannot stress how much I was frustrated over this, I was just so happy, that I can't even keep the professsionality here.<br>
+I cannot stress how much I was frustrated over this, I was just so happy, that I can't even keep the professionality here.<br>
 With the flag accepted, the task was now complete.<br>
 
 
