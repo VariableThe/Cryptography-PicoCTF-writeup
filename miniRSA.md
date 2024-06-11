@@ -84,3 +84,98 @@ ciphertext (c): 2205316413931134031074603746928247799030155221252519872650080519
 We can see that the e is quite small, as the hint 2 says, because of the small value of e the security of the encryption isn't very strong, we can leverage this to our advantage<br>
 and thereby decrypt the message without the private key.<br>
 Although I'm still not sure on how to go about that, but still progress is always positive.<br>
+Okay, openssl is of no use, I have to just write a program that will decrypt the ciphertext for me.<br>
+downloading python onto my linux based system:
+<pre>
+sudo apt install python3
+
+[sudo] password for variable:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libpython3-all-dev libpython3-dev libpython3-stdlib python3-all python3-all-dev python3-dev python3-distutils python3-lib2to3 python3-minimal python3-tk
+Suggested packages:
+  python3-doc python3-venv tix python3-tk-dbg
+The following packages will be upgraded:
+  libpython3-all-dev libpython3-dev libpython3-stdlib python3 python3-all python3-all-dev python3-dev python3-distutils python3-lib2to3 python3-minimal python3-tk
+11 upgraded, 0 newly installed, 0 to remove and 1570 not upgraded.
+Need to get 420 kB of archives.
+After this operation, 3072 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://kali.download/kali kali-rolling/main amd64 python3-all-dev amd64 3.11.8-1 [1072 B]
+Get:3 http://kali.download/kali kali-rolling/main amd64 libpython3-dev amd64 3.11.8-1 [9560 B]
+Get:4 http://kali.download/kali kali-rolling/main amd64 python3-dev amd64 3.11.8-1 [26.1 kB]
+Get:5 http://kali.download/kali kali-rolling/main amd64 python3-all amd64 3.11.8-1 [1056 B]
+Get:7 http://kali.download/kali kali-rolling/main amd64 python3 amd64 3.11.8-1 [27.4 kB]
+Get:8 http://kali.download/kali kali-rolling/main amd64 python3-distutils all 3.12.3-1 [131 kB]
+Get:11 http://kali.download/kali kali-rolling/main amd64 python3-tk amd64 3.12.3-1 [109 kB]
+Get:2 http://mirrors.neusoft.edu.cn/kali kali-rolling/main amd64 libpython3-all-dev amd64 3.11.8-1 [1072 B]
+Get:10 http://mirrors.neusoft.edu.cn/kali kali-rolling/main amd64 libpython3-stdlib amd64 3.11.8-1 [9332 B]
+Get:6 http://mirror.kku.ac.th/kali kali-rolling/main amd64 python3-minimal amd64 3.11.8-1 [26.3 kB]
+Get:9 http://mirror.kku.ac.th/kali kali-rolling/main amd64 python3-lib2to3 all 3.12.3-1 [77.6 kB]
+Fetched 420 kB in 18s (23.2 kB/s)
+(Reading database ... 403949 files and directories currently installed.)
+Preparing to unpack .../0-python3-all-dev_3.11.8-1_amd64.deb ...
+Unpacking python3-all-dev (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../1-libpython3-all-dev_3.11.8-1_amd64.deb ...
+Unpacking libpython3-all-dev:amd64 (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../2-libpython3-dev_3.11.8-1_amd64.deb ...
+Unpacking libpython3-dev:amd64 (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../3-python3-dev_3.11.8-1_amd64.deb ...
+Unpacking python3-dev (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../4-python3-all_3.11.8-1_amd64.deb ...
+Unpacking python3-all (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../5-python3-minimal_3.11.8-1_amd64.deb ...
+Unpacking python3-minimal (3.11.8-1) over (3.11.6-1) ...
+Setting up python3-minimal (3.11.8-1) ...
+(Reading database ... 403949 files and directories currently installed.)
+Preparing to unpack .../python3_3.11.8-1_amd64.deb ...
+running python pre-rtupdate hooks for python3.11...
+Unpacking python3 (3.11.8-1) over (3.11.6-1) ...
+Preparing to unpack .../python3-distutils_3.12.3-1_all.deb ...
+Unpacking python3-distutils (3.12.3-1) over (3.11.5-1) ...
+Preparing to unpack .../python3-lib2to3_3.12.3-1_all.deb ...
+Unpacking python3-lib2to3 (3.12.3-1) over (3.11.5-1) ...
+Preparing to unpack .../libpython3-stdlib_3.11.8-1_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.11.8-1) over (3.11.6-1) ...
+Unpacking python3-tk:amd64 (3.12.3-1) over (3.11.5-1) ...
+Progress: [ 49%] [#######################################################################################################.............................................................................................................]
+Setting up libpython3-dev:amd64 (3.11.8-1) ...################################################################################........................................................................................................]
+Setting up libpython3-all-dev:amd64 (3.11.8-1) ...#################################################################################...................................................................................................]
+Setting up libpython3-stdlib:amd64 (3.11.8-1) ...###########################################################################################..........................................................................................]
+Setting up python3 (3.11.8-1) ...####################################################################################################################.................................................................................]
+running python rtupdate hooks for python3.11...################################################################################################################.......................................................................]
+running python post-rtupdate hooks for python3.11...################################################################################################################..................................................................]
+Setting up python3-lib2to3 (3.12.3-1) ...
+Setting up python3-distutils (3.12.3-1) ...#############################################################################################################################..............................................................]
+python3.12: can't get files for byte-compilation##################################################################################################################################....................................................]
+Setting up python3-all (3.11.8-1) ...#################################################################################################################################################................................................]
+Setting up python3-tk:amd64 (3.12.3-1) ...#################################################################################################################################################...........................................]
+Setting up python3-dev (3.11.8-1) ...################################################################################################################################################################.................................]
+Setting up python3-all-dev (3.11.8-1) ...#####################################################################################################################################################################........................]
+Processing triggers for doc-base (0.11.2) ...##########################################################################################################################################################################...............]
+Processing 1 changed doc-base file...############################################################################################################################################################################################.....]
+Processing triggers for man-db (2.12.0-3) ...
+Processing triggers for kali-menu (2023.4.7) ...
+</pre>
+Checking for the install:
+<pre>
+python3 --version
+
+Python 3.11.8
+</pre>
+<pre>
+sudo apt install python3
+
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+python3 is already the newest version (3.11.8-1).
+python3 set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 1570 not upgraded.
+</pre>
+Now that python is downloaded to run the script, I can just write the script and run it.<br>
+
+
+
