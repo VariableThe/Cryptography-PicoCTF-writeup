@@ -176,6 +176,55 @@ python3 set to manually installed.
 0 upgraded, 0 newly installed, 0 to remove and 1570 not upgraded.
 </pre>
 Now that python is downloaded to run the script, I can just write the script and run it.<br>
+Ok, about the writing, I am not very well versed in python and am actually doing a course for it at the moment, but my knowledge is too little to write an effective program for the wuestion.<br>
+And my solution to this problem is stealing code. I have gone throught the code and tried figuring out what it does, so hopefully when I'm well versed in python, I can write my own code.<br>
+(┬┬﹏┬┬), but until then, I'm just going to be using [this](https://github.com/VermillionBird/CTF-Writeups/blob/master/Useful-Scripts/Cryptography/invpow.py)<br><br>
+The code is:
+<pre>
+#!/usr/bin/python
+import argparse
+import sys
 
+def find_invpow(x,n):
+	high = 1
+	while high ** n < x:
+		high *= 2
+	low = high/2
+	while low < high:
+		mid = (low + high) // 2
+		if low < mid and mid**n < x:
+			low = mid
+		elif high > mid and mid**n > x:
+			high = mid
+		else:
+			return mid
+	return mid + 1
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(description = 'Find the integer component of the nth root of a number')
+	parser.add_argument('n', help='The index for the root',metavar='index',type=int)
+	parser.add_argument('Number', help='The number to find the nth root of',metavar='number',type=int)
+	args = parser.parse_args()
+
+	x = args.Number
+	n = args.n
+	
+	res = find_invpow(x,n)
+
+	print "\n\nThe calculated root is: " + str(res)
+
+	reshex = hex(res).replace('0x','').replace('L','')
+	ascii = reshex.decode('hex')
+
+	print "\nASCII of the calculated root is:"
+	print ascii
+	
+	sys.exit()
+  </pre>
+  I can't run the code as it was not made for python 3, I tried fixing it, and it didn't work properly at all, sometimes it gave me a integer that on converting to plain text using ascii, would be gibberish. Eventually I was fed up and tried to look for an alternative.<br>
+  I then found [this site](https://www.dcode.fr/rsa-cipher?__r=1.ad85832d763108ce66a0f9442aa1af8f)<br>
+  And there, I input my values and got back 'picoCTF{n33d_a_lArg3r_e_d0cd6eae}'<br>
+  I finally had the flag<br>
+  Submitting it works and the task is complete.<br>
 
 
